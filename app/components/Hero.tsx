@@ -27,7 +27,7 @@ const Hero = () => {
             <Link href="#servicios" className="rounded-full bg-[#f77f00] px-7 py-3.5 text-center font-semibold text-[#1b1b1b] transition hover:-translate-y-0.5 hover:bg-[#ff9f1c]">
               Ver menú
             </Link>
-            <a href="https://wa.me/5216671234567" target="_blank" rel="noreferrer" className="rounded-full border border-white/25 bg-white/10 px-7 py-3.5 text-center font-semibold text-white backdrop-blur transition hover:bg-white/20">
+            <a href="https://wa.me/5216673342261" target="_blank" rel="noreferrer" className="rounded-full border border-white/25 bg-white/10 px-7 py-3.5 text-center font-semibold text-white backdrop-blur transition hover:bg-white/20">
               Enviar WhatsApp
             </a>
           </div>

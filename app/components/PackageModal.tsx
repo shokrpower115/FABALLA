@@ -8,7 +8,7 @@ import PackageSelector from "./PackageSelector";
 import PackageList from "./PackageList";
 import PackageCard from "./PackageCard";
 import { paquetesAsada, paquetesPastor, paquetesMixtos, tiposTaquiza } from "../lib/eventos/taquiza";
-import { paquetesHotdogs } from "../lib/eventos/hotdogs";
+import { paquetesHotdogs, paquetesHotdogsSinPapas, tiposHotdog  } from "../lib/eventos/hotdogs";
 import { combosAsada, combosPastor, combosMixtos, tiposCombo } from "../lib/eventos/combos";
 
 interface PackageModalProps {
@@ -36,7 +36,9 @@ const PackageModal = ({ open, onOpenChange, type }: PackageModalProps) => {
     }
 
     if (type === "hotdogs") {
-      return paquetesHotdogs as Array<{ id: number; nombre: string; precio: number; incluye: string[]; tacos?: number; cantidad?: number; hotdogs?: number }>;
+      if (selectedKind === "conPapas") return paquetesHotdogs;
+      if (selectedKind === "sinPapas") return paquetesHotdogsSinPapas; 
+      return paquetesHotdogs;
     }
 
     if (selectedKind === "pastor") return combosPastor;
@@ -44,8 +46,21 @@ const PackageModal = ({ open, onOpenChange, type }: PackageModalProps) => {
     return combosAsada;
   }, [selectedKind, type]);
 
-  const selectorOptions = type === "combos" ? tiposCombo : tiposTaquiza;
+const selectorOptions = useMemo(() => {
+  switch (type) {
+    case "taquiza":
+      return tiposTaquiza;
 
+    case "hotdogs":
+      return tiposHotdog;
+
+    case "combos":
+      return tiposCombo;
+
+    default:
+      return [];
+  }
+}, [type]);
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[90vh] max-w-4xl overflow-hidden border-0 bg-[#fff8e7] p-0 sm:rounded-[32px]">
@@ -65,7 +80,7 @@ const PackageModal = ({ open, onOpenChange, type }: PackageModalProps) => {
           </DialogHeader>
 
           <div className="space-y-6">
-            {(type === "taquiza" || type === "combos") && (
+            {(type === "taquiza" || type === "hotdogs" || type === "combos") && (
               <div>
                 <div className="flex items-center gap-2 text-sm font-semibold text-[#9d0208]">
                   <Sparkles className="h-4 w-4" /> {type === "taquiza" ? "¿Qué tipo de carne deseas?" : "Elige la combinación"}
