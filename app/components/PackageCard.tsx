@@ -37,7 +37,7 @@ const PackageCard = ({ title, subtitle, price, includes, cta, onSelect }: Packag
         </ul>
       </div>
 
-      <a href={`https://wa.me/5216671234567?text=${encodeURIComponent(whatsappMessage)}`} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#9d0208] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#d00000]">
+      <a href={`https://wa.me/5216673342261?text=${encodeURIComponent(whatsappMessage)}`} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#9d0208] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#d00000]">
         <MessageCircle className="h-4 w-4" /> {cta}
       </a>
     </motion.article>

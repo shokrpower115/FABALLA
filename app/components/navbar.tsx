@@ -16,7 +16,7 @@ export default function Navbar() {
           <a href="#ubicacion" className="transition hover:text-[#9d0208]">Ubicación</a>
         </nav>
 
-        <a href="https://wa.me/5216671234567" target="_blank" rel="noreferrer" className="rounded-full bg-[#9d0208] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#d00000]">
+        <a href="https://wa.me/5216673342261" target="_blank" rel="noreferrer" className="rounded-full bg-[#9d0208] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#d00000]">
           WhatsApp
         </a>
       </div>

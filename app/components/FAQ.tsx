@@ -24,7 +24,25 @@ const FAQ = () => {
                   <span className="text-lg font-semibold">{item.pregunta}</span>
                   <ChevronDown className={`h-5 w-5 transition ${isOpen ? "rotate-180" : ""}`} />
                 </button>
-                {isOpen && <p className="px-6 pb-6 text-sm leading-7 text-white/70">{item.respuesta}</p>}
+                {isOpen && (
+                    <p className="px-6 pb-6 text-sm leading-7 text-white/70">
+                      {item.respuesta}
+
+                      {item.href && (
+                        <>
+                          {" "}
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-semibold text-[#f77f00] underline transition hover:text-[#ffba08]"
+                          >
+                            {item.linkText ?? "Presione aquí"}
+                          </a>{" "}
+                        </>
+                      )}
+                    </p>
+                  )}
               </div>
             );
           })}
