@@ -36,7 +36,7 @@ export const birriaMenu: MenuItem[] = [
     id: "orden",
     nombre: "Orden",
     descripcion: "Porción de 1 orden de birria en caldo, Buena decision para probar la especialidad.",
-    precio: 50,
+    precio: 150,
     categoria: "Birria",
     badge: "Tortillas incluidas",
   },
