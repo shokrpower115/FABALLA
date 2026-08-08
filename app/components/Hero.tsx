@@ -20,7 +20,7 @@ const Hero = () => {
             La experiencia auténtica para tu próxima reunión.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-white/80 sm:text-xl">
-            Birria los fines de semana, menú nocturno de lunes a sábado y eventos privados con taquiza, hotdogs y mucho más.
+            Birria los fines de semana, menú nocturno de lunes a viernes y eventos privados con taquiza, hotdogs y mucho más.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -36,7 +36,7 @@ const Hero = () => {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }} className="mt-16 grid gap-4 md:grid-cols-3">
           {[
             { title: "Birria", subtitle: "Disponible viernes a domingo" },
-            { title: "Menú nocturno", subtitle: "Disponible lunes a sábado" },
+            { title: "Menú nocturno", subtitle: "Disponible lunes a viernes" },
             { title: "Eventos", subtitle: "Cotiza tu evento" },
           ].map((item) => (
             <div key={item.title} className="rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur-md">
