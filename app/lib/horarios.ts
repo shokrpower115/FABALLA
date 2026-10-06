@@ -10,6 +10,6 @@ export const horarios: HorarioItem[] = [
   { dia: "Miércoles", detalle: "Menú nocturno", icono: "🌙" },
   { dia: "Jueves", detalle: "Menú nocturno", icono: "🌙" },
   { dia: "Viernes", detalle: "Menú nocturno + Birria", icono: "🌙🍲" },
-  { dia: "Sábado", detalle: "Menú nocturno + Birria", icono: "🌙🍲" },
+  { dia: "Sábado", detalle: "Birria", icono: "🍲" },
   { dia: "Domingo", detalle: "Birria", icono: "🍲" },
 ];

@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fff8e7;
-  --foreground: #1b1b1b;
+  --background: var(--color-crema);
+  --foreground: var(--color-tinta);
 }
 
 @theme inline {
@@ -10,6 +10,19 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-display: var(--font-poppins);
+}
+
+/* Paleta de marca: usar como bg-vino, text-naranja, border-tinta/10, etc. */
+@theme {
+  --color-vino: #9d0208;
+  --color-rojo: #d00000;
+  --color-naranja: #f77f00;
+  --color-naranja-claro: #ff9f1c;
+  --color-durazno: #f7b267;
+  --color-crema: #fff8e7;
+  --color-tinta: #1b1b1b;
+  --color-carbon: #111111;
+  --color-whatsapp: #25d366;
 }
 
 html {
@@ -32,6 +45,6 @@ a {
 }
 
 ::selection {
-  background: #f77f00;
+  background: var(--color-naranja);
   color: white;
 }

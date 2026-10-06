@@ -35,12 +35,12 @@ const Eventos = () => {
   };
 
   return (
-    <section id="eventos" className="bg-[#fff8e7] px-6 py-24 sm:px-8 lg:px-12">
+    <section id="eventos" className="bg-crema px-6 py-24 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#d00000]">Eventos</p>
-          <h2 className="mt-3 text-3xl font-black text-[#1b1b1b] sm:text-4xl">Explora los paquetes de una forma más clara y fácil de ordenar.</h2>
-          <p className="mt-4 text-lg leading-8 text-[#1b1b1b]/70">
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-rojo">Eventos</p>
+          <h2 className="mt-3 text-3xl font-black text-tinta sm:text-4xl">Explora los paquetes de una forma más clara y fácil de ordenar.</h2>
+          <p className="mt-4 text-lg leading-8 text-tinta/70">
             Selecciona la opción que desees y encuentra un menú digital para que puedas elegir tu paquete con total comodidad.
           </p>
         </div>
@@ -60,6 +60,7 @@ const Eventos = () => {
 
       {selectedType && (
         <PackageModal
+          key={selectedType}
           open={open}
           onOpenChange={setOpen}
           type={selectedType}

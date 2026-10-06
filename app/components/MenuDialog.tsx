@@ -1,15 +1,14 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
-import { MessageCircle, Sparkles } from "lucide-react";
+import { useMemo } from "react";
+import { motion } from "framer-motion";
+import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
 import MenuHeader from "./MenuHeader";
 import MenuInfoCard from "./MenuInfoCard";
 import MenuCategory from "./MenuCategory";
 import MenuItemCard from "./MenuItemCard";
 import MenuFooter from "./MenuFooter";
-import type { MenuItem } from "../lib/menus/birria";
+import type { MenuItem } from "../lib/menus/tipos";
 
 interface MenuDialogProps {
   open: boolean;
@@ -23,9 +22,7 @@ interface MenuDialogProps {
 }
 
 const MenuDialog = ({ open, onOpenChange, title, subtitle, description, note, menu, accent = "light" }: MenuDialogProps) => {
-  const shellClassName = accent === "dark" ? "bg-[#1b1b1b] text-white" : "bg-[#fff8e7] text-[#1b1b1b]";
-  const cardClassName = accent === "dark" ? "border-white/10 bg-[#111111] text-white" : "border-[#1b1b1b]/10 bg-white text-[#1b1b1b]";
-  const mutedTextClassName = accent === "dark" ? "text-white/70" : "text-[#1b1b1b]/70";
+  const shellClassName = accent === "dark" ? "bg-tinta text-white" : "bg-crema text-tinta";
 
   const categories = useMemo(() => {
     return Array.from(new Set(menu.map((item) => item.categoria)));
@@ -33,7 +30,8 @@ const MenuDialog = ({ open, onOpenChange, title, subtitle, description, note, me
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className={`max-h-[92vh] max-w-5xl overflow-hidden border-0 p-0 sm:rounded-[32px] ${shellClassName}`}>
+      <DialogContent aria-describedby={undefined} className={`max-h-[92vh] max-w-5xl overflow-hidden border-0 p-0 sm:rounded-[32px] ${shellClassName}`}>
+        <DialogTitle className="sr-only">{title}</DialogTitle>
         <div className="max-h-[92vh] overflow-y-auto">
           <div className="p-4 sm:p-6 lg:p-8">
             <MenuHeader title={title} subtitle={subtitle} description={description} accent={accent} />

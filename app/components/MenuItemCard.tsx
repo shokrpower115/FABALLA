@@ -11,10 +11,10 @@ interface MenuItemCardProps {
 
 const MenuItemCard = ({ name, description, price, badge, index, accent = "light" }: MenuItemCardProps) => {
   const shellClassName = accent === "dark"
-    ? "border-white/10 bg-[#111111] text-white"
-    : "border-[#1b1b1b]/10 bg-white text-[#1b1b1b]";
-  const mutedTextClassName = accent === "dark" ? "text-white/70" : "text-[#1b1b1b]/70";
-  const priceClassName = accent === "dark" ? "bg-[#f77f00]/15 text-[#f77f00]" : "bg-[#9d0208]/10 text-[#9d0208]";
+    ? "border-white/10 bg-carbon text-white"
+    : "border-tinta/10 bg-white text-tinta";
+  const mutedTextClassName = accent === "dark" ? "text-white/70" : "text-tinta/70";
+  const priceClassName = accent === "dark" ? "bg-naranja/15 text-naranja" : "bg-vino/10 text-vino";
 
   return (
     <motion.div
@@ -27,7 +27,7 @@ const MenuItemCard = ({ name, description, price, badge, index, accent = "light"
         <div className="flex flex-wrap items-center gap-2">
           <h3 className="text-lg font-semibold">{name}</h3>
           {badge && (
-            <span className="rounded-full bg-[#f77f00]/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#f77f00]">
+            <span className="rounded-full bg-naranja/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-naranja">
               {badge}
             </span>
           )}

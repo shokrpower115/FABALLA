@@ -1,17 +1,11 @@
-export interface MenuItem {
-  id: string;
-  nombre: string;
-  descripcion: string;
-  precio: number;
-  categoria: string;
-  badge?: string;
-}
+import type { MenuItem } from "./tipos";
+import { horarioBirria } from "../negocio";
 
 export const birriaMenu: MenuItem[] = [
   {
     id: "quesabirria",
     nombre: "Quesabirria",
-    descripcion: "Tortilla dorada con costra de quesorellena de birria.",
+    descripcion: "Tortilla dorada con costra de queso, rellena de birria.",
     precio: 40,
     categoria: "Birria",
     badge: "Consomé incluido",
@@ -27,7 +21,7 @@ export const birriaMenu: MenuItem[] = [
   {
     id: "media-orden",
     nombre: "Media Orden",
-    descripcion: "Porción de 1/2 orden de birria en caldo, Buena decision para probar la especialidad.",
+    descripcion: "Porción de 1/2 orden de birria en caldo. Buena opción para probar la especialidad.",
     precio: 90,
     categoria: "Birria",
     badge: "Tortillas incluidas",
@@ -35,13 +29,13 @@ export const birriaMenu: MenuItem[] = [
   {
     id: "orden",
     nombre: "Orden",
-    descripcion: "Porción de 1 orden de birria en caldo, Buena decision para probar la especialidad.",
-    precio: 50,
+    descripcion: "Porción de 1 orden de birria en caldo, ideal para disfrutar la especialidad completa.",
+    precio: 150,
     categoria: "Birria",
     badge: "Tortillas incluidas",
   },
   {
-    id: "enchilada",
+    id: "enchivada",
     nombre: "Enchivada",
     descripcion: "Tortilla dorada con costra de queso y asiento, rellena de birria.",
     precio: 80,
@@ -57,7 +51,7 @@ export const birriaMenu: MenuItem[] = [
   {
     id: "birriamen",
     nombre: "Birriamen",
-    descripcion: "Maruchan preparada con consome de birria y porcion de carne en caldo.",
+    descripcion: "Maruchan preparada con consomé de birria y porción de carne en caldo.",
     precio: 120,
     categoria: "Birria",
     badge: "Tortillas incluidas",
@@ -66,7 +60,7 @@ export const birriaMenu: MenuItem[] = [
 
 export const birriaInfo = {
   title: "Menú de Birria",
-  subtitle: "Disponible Viernes a Domingo",
+  subtitle: `${horarioBirria.dias} · ${horarioBirria.horas}`,
   description: "El auténtico sabor de la birria.",
   note: "Todos nuestros platillos incluyen los complementos correspondientes.",
 };

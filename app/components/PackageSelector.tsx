@@ -17,10 +17,10 @@ const PackageSelector = ({ options, selected, onSelect }: PackageSelectorProps) 
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => onSelect(option.id)}
-            className={`rounded-[20px] border px-4 py-4 text-left transition ${isSelected ? "border-[#9d0208] bg-[#9d0208]/10" : "border-[#1b1b1b]/10 bg-white"}`}
+            className={`rounded-[20px] border px-4 py-4 text-left transition ${isSelected ? "border-vino bg-vino/10" : "border-tinta/10 bg-white"}`}
           >
             <div className="text-2xl">{option.icon}</div>
-            <p className="mt-3 font-semibold text-[#1b1b1b]">{option.name}</p>
+            <p className="mt-3 font-semibold text-tinta">{option.name}</p>
           </motion.button>
         );
       })}

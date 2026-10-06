@@ -30,6 +30,6 @@ export const serviciosDestacados: ServicioDestacado[] = [
     descripcion: "Taquiza, birria, hotdogs y combos para celebrar con un servicio elegante y profesional.",
     cta: "Cotizar evento",
     href: "#eventos",
-    imagen: "/Menu-Eventos.png",
+    imagen: "/Menu-Eventos.jpeg",
   },
 ];
