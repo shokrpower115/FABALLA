@@ -8,7 +8,7 @@ const FAQ = () => {
   const [abierta, setAbierta] = useState<number | null>(0);
 
   return (
-    <section className="bg-tinta px-6 py-24 text-white sm:px-8 lg:px-12">
+    <section id="faq" className="bg-tinta px-6 py-24 text-white sm:px-8 lg:px-12">
       <div className="mx-auto max-w-5xl">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.35em] text-naranja">FAQ</p>

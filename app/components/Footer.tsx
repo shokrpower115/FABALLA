@@ -4,7 +4,7 @@ import { horarioBirria, horarioNocturno, negocio, whatsappUrl } from "../lib/neg
 
 const Footer = () => {
   return (
-    <footer className="border-t border-tinta/10 bg-crema px-6 py-16 sm:px-8 lg:px-12">
+    <footer className="border-t border-tinta/10 bg-crema px-6 pb-28 pt-16 sm:px-8 sm:pb-16 lg:px-12">
       <div className="mx-auto flex max-w-7xl flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
         <div className="max-w-md">
           <p className="text-xl font-black tracking-[0.25em] text-vino">FABALLA</p>

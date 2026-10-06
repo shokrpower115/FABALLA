@@ -1,7 +1,5 @@
 import Hero from "./components/Hero";
-import Servicios from "./components/Servicios";
-import Birria from "./components/Birria";
-import MenuNocturno from "./components/MenuNocturno";
+import Menu from "./components/Menu";
 import Eventos from "./components/Eventos";
 import Galeria from "./components/Galeria";
 import Ubicacion from "./components/Ubicacion";
@@ -11,11 +9,9 @@ import WhatsAppButton from "./components/WhatsAppButton";
 
 export default function Home() {
   return (
-    <main id="inicio">
+    <main>
       <Hero />
-      <Servicios />
-      <Birria />
-      <MenuNocturno />
+      <Menu />
       <Eventos />
       <Galeria />
       <Ubicacion />

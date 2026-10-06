@@ -3,8 +3,11 @@
 import { useState } from "react";
 import EventCard from "./EventCard";
 import PackageModal from "./PackageModal";
+import CarretaBirria from "./CarretaBirria";
 
-const eventos = [
+type TipoEvento = "taquiza" | "hotdogs" | "combos" | "birria";
+
+const eventos: { id: TipoEvento; title: string; description: string; accent: string }[] = [
   {
     id: "taquiza",
     title: "Taquiza",
@@ -23,13 +26,19 @@ const eventos = [
     description: "Combina taquiza y hotdogs para ofrecer una experiencia completa y con mayor variedad.",
     accent: "🔥",
   },
-] as const;
+  {
+    id: "birria",
+    title: "Birria",
+    description: "Carreta para eventos con paquetes de tacos y quesabirrias, o mitad y mitad.",
+    accent: "🍲",
+  },
+];
 
 const Eventos = () => {
-  const [selectedType, setSelectedType] = useState<"taquiza" | "hotdogs" | "combos" | null>(null);
+  const [selectedType, setSelectedType] = useState<TipoEvento | null>(null);
   const [open, setOpen] = useState(false);
 
-  const handleOpen = (type: "taquiza" | "hotdogs" | "combos") => {
+  const handleOpen = (type: TipoEvento) => {
     setSelectedType(type);
     setOpen(true);
   };
@@ -45,20 +54,22 @@ const Eventos = () => {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {eventos.map((evento) => (
             <EventCard
               key={evento.id}
               title={evento.title}
               description={evento.description}
               accent={evento.accent}
-              onOpen={() => handleOpen(evento.id as "taquiza" | "hotdogs" | "combos")}
+              onOpen={() => handleOpen(evento.id)}
             />
           ))}
         </div>
       </div>
 
-      {selectedType && (
+      {selectedType === "birria" && <CarretaBirria open={open} onOpenChange={setOpen} />}
+
+      {selectedType && selectedType !== "birria" && (
         <PackageModal
           key={selectedType}
           open={open}
