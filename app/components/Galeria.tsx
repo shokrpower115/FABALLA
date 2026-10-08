@@ -9,11 +9,11 @@ const imagenes = [
 
 const Galeria = () => {
   return (
-    <section id="galeria" className="bg-[#fff8e7] px-6 py-24 sm:px-8 lg:px-12">
+    <section id="galeria" className="bg-crema px-6 py-24 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#d00000]">Galería</p>
-          <h2 className="mt-3 text-3xl font-black text-[#1b1b1b] sm:text-4xl">Cada plato y cada evento cuentan una historia.</h2>
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-rojo">Galería</p>
+          <h2 className="mt-3 text-3xl font-black text-tinta sm:text-4xl">Cada plato y cada evento cuentan una historia.</h2>
         </div>
 
         <div className="mt-12 grid gap-5 md:grid-cols-2">

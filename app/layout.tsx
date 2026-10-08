@@ -17,7 +17,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "FABALLA | Birria, menú nocturno y eventos",
-  description: "FABALLA ofrece birria los fines de semana, menú nocturno de lunes a sábado y eventos privados con taquiza, hotdogs y combos.",
+  description: "FABALLA ofrece birria los fines de semana, menú nocturno de lunes a viernes y eventos privados con taquiza, hotdogs y combos.",
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`${poppins.variable} ${inter.variable}`}>
-      <body className="bg-[#fff8e7] text-[#1b1b1b] antialiased">
+      <body className="bg-crema text-tinta antialiased">
         <Navbar />
         {children}
       </body>

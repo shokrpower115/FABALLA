@@ -1,11 +1,5 @@
-export interface MenuItem {
-  id: string;
-  nombre: string;
-  descripcion: string;
-  precio: number;
-  categoria: string;
-  badge?: string;
-}
+import type { MenuItem } from "./tipos";
+import { horarioNocturno } from "../negocio";
 
 export const menuNocturno: MenuItem[] = [
   {
@@ -177,7 +171,7 @@ export const menuNocturno: MenuItem[] = [
 
 export const nocturnoInfo = {
   title: "Menú Nocturno",
-  subtitle: "Disponible Lunes a Viernes de 7:00 PM a 11:00 PM",
+  subtitle: `${horarioNocturno.dias} · ${horarioNocturno.horas}`,
   description: "Tacos, hotdogs y antojitos preparados al momento.",
   note: "Ideal para disfrutar en la noche con una experiencia más casual y dinámica.",
 };

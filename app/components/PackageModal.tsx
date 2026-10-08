@@ -8,7 +8,7 @@ import PackageSelector from "./PackageSelector";
 import PackageList from "./PackageList";
 import PackageCard from "./PackageCard";
 import { paquetesAsada, paquetesPastor, paquetesMixtos, tiposTaquiza } from "../lib/eventos/taquiza";
-import { paquetesHotdogs, paquetesHotdogsSinPapas, tiposHotdog  } from "../lib/eventos/hotdogs";
+import { paquetesHotdogs, paquetesHotdogsSinPapas, tiposHotdog } from "../lib/eventos/hotdogs";
 import { combosAsada, combosPastor, combosMixtos, tiposCombo } from "../lib/eventos/combos";
 
 interface PackageModalProps {
@@ -17,8 +17,16 @@ interface PackageModalProps {
   type: "taquiza" | "hotdogs" | "combos";
 }
 
+const opcionesPorTipo = {
+  taquiza: tiposTaquiza,
+  hotdogs: tiposHotdog,
+  combos: tiposCombo,
+};
+
+// El componente se monta con key={type}, así la selección arranca en la primera opción de cada tipo.
 const PackageModal = ({ open, onOpenChange, type }: PackageModalProps) => {
-  const [selectedKind, setSelectedKind] = useState("asada");
+  const selectorOptions = opcionesPorTipo[type];
+  const [selectedKind, setSelectedKind] = useState<string>(selectorOptions[0].id);
 
   const title = useMemo(() => {
     if (type === "taquiza") return "Taquiza";
@@ -36,8 +44,7 @@ const PackageModal = ({ open, onOpenChange, type }: PackageModalProps) => {
     }
 
     if (type === "hotdogs") {
-      if (selectedKind === "conPapas") return paquetesHotdogs;
-      if (selectedKind === "sinPapas") return paquetesHotdogsSinPapas; 
+      if (selectedKind === "sinPapas") return paquetesHotdogsSinPapas;
       return paquetesHotdogs;
     }
 
@@ -46,31 +53,16 @@ const PackageModal = ({ open, onOpenChange, type }: PackageModalProps) => {
     return combosAsada;
   }, [selectedKind, type]);
 
-const selectorOptions = useMemo(() => {
-  switch (type) {
-    case "taquiza":
-      return tiposTaquiza;
-
-    case "hotdogs":
-      return tiposHotdog;
-
-    case "combos":
-      return tiposCombo;
-
-    default:
-      return [];
-  }
-}, [type]);
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90vh] max-w-4xl overflow-hidden border-0 bg-[#fff8e7] p-0 sm:rounded-[32px]">
+      <DialogContent aria-describedby={undefined} className="max-h-[90vh] max-w-4xl overflow-hidden border-0 bg-crema p-0 sm:rounded-[32px]">
         <div className="max-h-[85vh] overflow-y-auto p-6 sm:p-8">
           <DialogHeader className="mb-6">
-            <button onClick={() => onOpenChange(false)} className="mb-4 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[#9d0208]">
+            <button onClick={() => onOpenChange(false)} className="mb-4 inline-flex w-fit items-center gap-2 text-sm font-semibold text-vino">
               <ArrowLeft className="h-4 w-4" /> Volver
             </button>
-            <DialogTitle className="text-2xl font-black text-[#1b1b1b]">{title}</DialogTitle>
-            <p className="mt-2 text-sm leading-7 text-[#1b1b1b]/70">
+            <DialogTitle className="text-2xl font-black text-tinta">{title}</DialogTitle>
+            <p className="mt-2 text-sm leading-7 text-tinta/70">
               {type === "taquiza"
                 ? "Selecciona el tipo de carne para ver los paquetes disponibles."
                 : type === "hotdogs"
@@ -82,7 +74,7 @@ const selectorOptions = useMemo(() => {
           <div className="space-y-6">
             {(type === "taquiza" || type === "hotdogs" || type === "combos") && (
               <div>
-                <div className="flex items-center gap-2 text-sm font-semibold text-[#9d0208]">
+                <div className="flex items-center gap-2 text-sm font-semibold text-vino">
                   <Sparkles className="h-4 w-4" /> {type === "taquiza" ? "¿Qué tipo de carne deseas?" : "Elige la combinación"}
                 </div>
                 <div className="mt-4">
@@ -102,8 +94,7 @@ const selectorOptions = useMemo(() => {
                         subtitle={`${item.tacos} tacos`}
                         price={item.precio}
                         includes={item.incluye}
-                        cta="Seleccionar paquete"
-                        onSelect={() => {}}
+                        cta="Cotizar por WhatsApp"
                       />
                     )}
                   />
@@ -118,8 +109,7 @@ const selectorOptions = useMemo(() => {
                         subtitle={`${item.cantidad} hotdogs`}
                         price={item.precio}
                         includes={item.incluye}
-                        cta="Seleccionar paquete"
-                        onSelect={() => {}}
+                        cta="Cotizar por WhatsApp"
                       />
                     )}
                   />
@@ -134,8 +124,7 @@ const selectorOptions = useMemo(() => {
                         subtitle={`${item.tacos} tacos • ${item.hotdogs} hotdogs`}
                         price={item.precio}
                         includes={item.incluye}
-                        cta="Seleccionar paquete"
-                        onSelect={() => {}}
+                        cta="Cotizar por WhatsApp"
                       />
                     )}
                   />

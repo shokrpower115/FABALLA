@@ -1,15 +1,18 @@
+import { nombresDia } from "./estado";
+import { horariosServicio } from "./negocio";
+
 export interface HorarioItem {
   dia: string;
   detalle: string;
   icono: string;
 }
 
-export const horarios: HorarioItem[] = [
-  { dia: "Lunes", detalle: "Menú nocturno", icono: "🌙" },
-  { dia: "Martes", detalle: "Menú nocturno", icono: "🌙" },
-  { dia: "Miércoles", detalle: "Menú nocturno", icono: "🌙" },
-  { dia: "Jueves", detalle: "Menú nocturno", icono: "🌙" },
-  { dia: "Viernes", detalle: "Menú nocturno + Birria", icono: "🌙🍲" },
-  { dia: "Sábado", detalle: "Menú nocturno + Birria", icono: "🌙🍲" },
-  { dia: "Domingo", detalle: "Birria", icono: "🍲" },
-];
+// Lunes primero; se genera a partir de los horarios de negocio.ts.
+export const horarios: HorarioItem[] = [1, 2, 3, 4, 5, 6, 0].map((dia) => {
+  const servicios = horariosServicio.filter((h) => h.diasSemana.includes(dia));
+  return {
+    dia: nombresDia[dia],
+    detalle: servicios.length > 0 ? servicios.map((h) => h.nombre).join(" + ") : "Cerrado",
+    icono: servicios.map((h) => h.icono).join(""),
+  };
+});

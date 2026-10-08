@@ -8,10 +8,10 @@ const FAQ = () => {
   const [abierta, setAbierta] = useState<number | null>(0);
 
   return (
-    <section className="bg-[#1b1b1b] px-6 py-24 text-white sm:px-8 lg:px-12">
+    <section id="faq" className="bg-tinta px-6 py-24 text-white sm:px-8 lg:px-12">
       <div className="mx-auto max-w-5xl">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#f77f00]">FAQ</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-naranja">FAQ</p>
           <h2 className="mt-3 text-3xl font-black sm:text-4xl">Resolvemos tus dudas antes de que llegues.</h2>
         </div>
 
@@ -35,7 +35,7 @@ const FAQ = () => {
                             href={item.href}
                             target="_blank"
                             rel="noreferrer"
-                            className="font-semibold text-[#f77f00] underline transition hover:text-[#ffba08]"
+                            className="font-semibold text-naranja underline transition hover:text-naranja-claro"
                           >
                             {item.linkText ?? "Presione aquí"}
                           </a>{" "}

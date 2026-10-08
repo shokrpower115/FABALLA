@@ -1,10 +1,17 @@
 import { MessageCircle } from "lucide-react";
+import { whatsappUrl } from "../lib/negocio";
 
 const WhatsAppButton = () => {
   return (
-    <a href="https://wa.me/5216673342261" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-full bg-[#25d366] px-5 py-3 text-sm font-semibold text-white shadow-[0_15px_40px_rgba(37,211,102,0.35)] transition hover:scale-105">
-      <MessageCircle className="h-5 w-5" />
-      WhatsApp
+    <a
+      href={whatsappUrl()}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Escríbenos por WhatsApp"
+      className="fixed bottom-5 right-5 z-40 flex items-center gap-3 rounded-full bg-whatsapp p-4 text-sm font-semibold text-white shadow-[0_15px_40px_rgba(37,211,102,0.35)] transition hover:scale-105 sm:bottom-6 sm:right-6 sm:px-5 sm:py-3"
+    >
+      <MessageCircle className="h-6 w-6 sm:h-5 sm:w-5" />
+      <span className="hidden sm:inline">WhatsApp</span>
     </a>
   );
 };
