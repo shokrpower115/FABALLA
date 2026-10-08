@@ -19,6 +19,21 @@ export const birriaMenu: MenuItem[] = [
     badge: "Consomé incluido",
   },
   {
+    id: "gordita",
+    nombre: "Gordita Dorada",
+    descripcion: "Gordita de maíz con asiento, queso y carne.",
+    precio: 50,
+    categoria: "Birria",
+    badge: "Consomé incluido",
+  },
+  {
+    id: "planchada",
+    nombre: "Planchada de Harina",
+    descripcion: "2 tortillas de harina con queso gratinado, carne y su respectivo consomé.",
+    precio: 90,
+    categoria: "Birria",
+  },
+  {
     id: "media-orden",
     nombre: "Media Orden",
     descripcion: "Porción de 1/2 orden de birria en caldo. Buena opción para probar la especialidad.",
@@ -65,7 +80,7 @@ export const birriaMenu: MenuItem[] = [
     {
     id: "torta",
     nombre: "Torta de Birria",
-    descripcion: "Torta de birria servida con cebolla y cilantro.",
+    descripcion: "Pan dorado con base de aderezo chipotle con queso gratinado y carne.",
     precio: 90,
     categoria: "Birria",
     badge: "Consomé incluido",
