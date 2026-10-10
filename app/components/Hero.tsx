@@ -8,7 +8,7 @@ const Hero = () => {
   return (
     <section id="inicio" className="relative isolate overflow-hidden bg-tinta text-white">
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url('/galeria/hero.webp')] bg-cover bg-[position:50%_45%]" />
         <div className="absolute inset-0 bg-black/70" />
       </div>
 
