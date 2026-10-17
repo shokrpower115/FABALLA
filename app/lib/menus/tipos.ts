@@ -5,4 +5,6 @@ export interface MenuItem {
   precio: number;
   categoria: string;
   badge?: string;
+  // Ruta dentro de /public, p. ej. "/menu/birria/tacos.webp"
+  imagen?: string;
 }

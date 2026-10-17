@@ -1,3 +1,4 @@
+import Navbar from "./components/navbar";
 import Hero from "./components/Hero";
 import Menu from "./components/Menu";
 import Eventos from "./components/Eventos";
@@ -9,15 +10,18 @@ import WhatsAppButton from "./components/WhatsAppButton";
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
-      <Menu />
-      <Eventos />
-      <Galeria />
-      <Ubicacion />
-      <FAQ />
-      <Footer />
-      <WhatsAppButton />
-    </main>
+    <>
+      <Navbar />
+      <main>
+        <Hero />
+        <Menu />
+        <Eventos />
+        <Galeria />
+        <Ubicacion />
+        <FAQ />
+        <Footer />
+        <WhatsAppButton />
+      </main>
+    </>
   );
 }
