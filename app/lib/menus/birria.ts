@@ -8,6 +8,7 @@ export const birriaMenu: MenuItem[] = [
     descripcion: "Tortilla dorada con costra de queso, rellena de birria.",
     precio: 40,
     categoria: "Birria",
+    imagen: "/menu/birria/Quesabirria.jpeg",
     badge: "Consomé incluido",
   },
   {
@@ -24,6 +25,7 @@ export const birriaMenu: MenuItem[] = [
     descripcion: "Gordita de maíz con asiento, queso y carne.",
     precio: 60,
     categoria: "Birria",
+    imagen: "/menu/birria/Gordita.jpeg",
     badge: "Consomé incluido",
   },
   {
@@ -32,6 +34,7 @@ export const birriaMenu: MenuItem[] = [
     descripcion: "2 tortillas de harina con queso gratinado, carne y su respectivo consomé.",
     precio: 100,
     categoria: "Birria",
+    imagen: "/menu/birria/Planchada.jpeg",
   },
   {
     id: "media-orden",
@@ -39,6 +42,8 @@ export const birriaMenu: MenuItem[] = [
     descripcion: "Porción de 1/2 orden de birria en caldo. Buena opción para probar la especialidad.",
     precio: 90,
     categoria: "Birria",
+    // Temporal: usa la foto de la Orden hasta tener la suya.
+    imagen: "/menu/birria/Orden.jpeg",
     badge: "Tortillas incluidas",
   },
   {
@@ -47,6 +52,7 @@ export const birriaMenu: MenuItem[] = [
     descripcion: "Porción de 1 orden de birria en caldo, ideal para disfrutar la especialidad completa.",
     precio: 150,
     categoria: "Birria",
+    imagen: "/menu/birria/Orden.jpeg",
     badge: "Tortillas incluidas",
   },
   {
@@ -55,6 +61,7 @@ export const birriaMenu: MenuItem[] = [
     descripcion: "Tortilla dorada con costra de queso y asiento, rellena de birria.",
     precio: 80,
     categoria: "Birria",
+    imagen: "/menu/birria/Enchivada.jpeg",
   },
     {
     id: "enchivada-TM",
@@ -62,6 +69,7 @@ export const birriaMenu: MenuItem[] = [
     descripcion: "Tortilla hecha a mano dorada con costra de queso y asiento, rellena de birria.",
     precio: 100,
     categoria: "Birria",
+    imagen: "/menu/birria/Enchivada_TortillaMano.jpeg",
   },
   {
     id: "quesadilla",
@@ -83,6 +91,7 @@ export const birriaMenu: MenuItem[] = [
     descripcion: "Pan dorado con base de aderezo chipotle con queso gratinado y carne.",
     precio: 90,
     categoria: "Birria",
+    imagen: "/menu/birria/Torta_Birria.jpeg",
     badge: "Consomé incluido",
   },
   {
@@ -91,6 +100,7 @@ export const birriaMenu: MenuItem[] = [
     descripcion: "Maruchan preparada con consomé de birria y porción de carne en caldo.",
     precio: 120,
     categoria: "Birria",
+    imagen: "/menu/birria/Birriamen.jpeg",
     badge: "Tortillas incluidas",
   },
 ];
