@@ -9,6 +9,7 @@ import { useTemporada } from "../lib/useTemporada";
 import SeccionTemporada from "./SeccionTemporada";
 import Eventos from "./Eventos";
 import WhatsAppButton from "./WhatsAppButton";
+import RevelarAlDesplazar from "./RevelarAlDesplazar";
 
 // Página propia de una temporada (faballa.com/diciembre, faballa.com/reyes).
 // Fuera de su temporada manda a la sección de eventos de la página principal,
@@ -46,6 +47,7 @@ const PaginaTemporada = ({ id }: { id: string }) => {
         <Eventos />
         <WhatsAppButton />
       </main>
+      <RevelarAlDesplazar />
     </>
   );
 };

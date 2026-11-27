@@ -10,6 +10,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import FranjaEventos from "./components/FranjaEventos";
 import TemporadaEnInicio from "./components/TemporadaEnInicio";
 import AvisoEventos from "./components/AvisoEventos";
+import RevelarAlDesplazar from "./components/RevelarAlDesplazar";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
         <WhatsAppButton />
       </main>
       <AvisoEventos />
+      <RevelarAlDesplazar />
     </>
   );
 }
