@@ -8,10 +8,12 @@ interface PackageCardProps {
   price: number;
   includes: string[];
   cta: string;
+  // Aviso de temporada: se muestra en la tarjeta y se agrega al mensaje de WhatsApp.
+  nota?: string;
 }
 
-const PackageCard = ({ title, subtitle, price, includes, cta }: PackageCardProps) => {
-  const whatsappMessage = `Hola, me interesa cotizar el siguiente paquete:\n\nTipo: ${title}\nPrecio: $${price}\n\n¿Podrían darme más información?`;
+const PackageCard = ({ title, subtitle, price, includes, cta, nota }: PackageCardProps) => {
+  const whatsappMessage = `Hola, me interesa cotizar el siguiente paquete:\n\nTipo: ${title}\nPrecio: $${price}${nota ? `\n(${nota})` : ""}\n\n¿Podrían darme más información?`;
 
   return (
     <motion.article whileHover={{ y: -3, scale: 1.01 }} className="rounded-[24px] border border-tinta/10 bg-white p-6 shadow-sm">
@@ -19,6 +21,7 @@ const PackageCard = ({ title, subtitle, price, includes, cta }: PackageCardProps
         <div>
           <h4 className="text-xl font-bold text-tinta">{title}</h4>
           {subtitle && <p className="mt-2 text-sm text-tinta/70">{subtitle}</p>}
+          {nota && <p className="mt-2 text-xs font-semibold text-vino">🎁 {nota}</p>}
         </div>
         <div className="rounded-full bg-naranja/10 px-3 py-1 text-sm font-semibold text-naranja">
           ${price.toLocaleString("es-MX")}

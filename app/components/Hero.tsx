@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import HoyEnFaballa from "./HoyEnFaballa";
 
@@ -13,7 +12,7 @@ const Hero = () => {
       </div>
 
       <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-7xl items-center gap-10 px-6 py-16 sm:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:px-12 lg:py-24">
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <div className="aparecer">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.35em] text-durazno">
             FABALLA • Culiacán, Sinaloa
           </p>
@@ -32,11 +31,11 @@ const Hero = () => {
               Cotizar un evento
             </a>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
+        <div className="aparecer-tarde">
           <HoyEnFaballa />
-        </motion.div>
+        </div>
       </div>
     </section>
   );
