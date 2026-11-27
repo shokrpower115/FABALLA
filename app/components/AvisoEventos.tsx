@@ -91,8 +91,8 @@ const AvisoEventos = () => {
     evento.preventDefault();
     pasoEnHistorial.current = false;
     if (temporada) {
-      // En temporada: a la página de la temporada, abriendo directo en los paquetes.
-      window.location.replace(`/${temporada.id}${window.location.search}#eventos`);
+      // En temporada: al inicio de la página de la temporada (faballa.com/diciembre).
+      window.location.replace(`/${temporada.id}${window.location.search}`);
       return;
     }
     // Fuera de temporada: baja a la sección de eventos de esta misma página.
@@ -133,7 +133,7 @@ const AvisoEventos = () => {
 
           <div className="mt-6 flex gap-3">
             <a
-              href={temporada ? `/${temporada.id}#eventos` : "#eventos"}
+              href={temporada ? `/${temporada.id}` : "#eventos"}
               onClick={irAEventos}
               className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-naranja px-6 py-3.5 font-bold text-tinta shadow-[0_12px_30px_rgba(247,127,0,0.35)] transition hover:-translate-y-0.5 hover:bg-naranja-claro"
             >
