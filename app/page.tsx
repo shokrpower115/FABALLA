@@ -7,13 +7,18 @@ import Ubicacion from "./components/Ubicacion";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
+import FranjaEventos from "./components/FranjaEventos";
+import TemporadaEnInicio from "./components/TemporadaEnInicio";
+import AvisoEventos from "./components/AvisoEventos";
 
 export default function Home() {
   return (
     <>
+      <FranjaEventos />
       <Navbar />
       <main>
         <Hero />
+        <TemporadaEnInicio />
         <Menu />
         <Eventos />
         <Galeria />
@@ -22,6 +27,7 @@ export default function Home() {
         <Footer />
         <WhatsAppButton />
       </main>
+      <AvisoEventos />
     </>
   );
 }

@@ -4,6 +4,9 @@ import { useState } from "react";
 import EventCard from "./EventCard";
 import PackageModal from "./PackageModal";
 import CarretaBirria from "./CarretaBirria";
+import { Gift } from "lucide-react";
+import { textoPromo } from "../lib/temporadas";
+import { useTemporada } from "../lib/useTemporada";
 
 type TipoEvento = "taquiza" | "hotdogs" | "combos" | "birria";
 
@@ -37,6 +40,7 @@ const eventos: { id: TipoEvento; title: string; description: string; accent: str
 const Eventos = () => {
   const [selectedType, setSelectedType] = useState<TipoEvento | null>(null);
   const [open, setOpen] = useState(false);
+  const promo = useTemporada()?.promo ?? null;
 
   const handleOpen = (type: TipoEvento) => {
     setSelectedType(type);
@@ -54,6 +58,15 @@ const Eventos = () => {
           </p>
         </div>
 
+        {promo && (
+          <div className="mt-8 flex max-w-3xl gap-3 rounded-2xl border-2 border-naranja/50 bg-naranja/10 p-4">
+            <Gift className="mt-0.5 h-5 w-5 shrink-0 text-naranja" />
+            <p className="text-sm font-semibold leading-6 text-tinta">
+              Precios de temporada. {textoPromo(promo)}
+            </p>
+          </div>
+        )}
+
         <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {eventos.map((evento) => (
             <EventCard
@@ -67,7 +80,7 @@ const Eventos = () => {
         </div>
       </div>
 
-      {selectedType === "birria" && <CarretaBirria open={open} onOpenChange={setOpen} />}
+      {selectedType === "birria" && <CarretaBirria open={open} onOpenChange={setOpen} promo={promo} />}
 
       {selectedType && selectedType !== "birria" && (
         <PackageModal
@@ -75,6 +88,7 @@ const Eventos = () => {
           open={open}
           onOpenChange={setOpen}
           type={selectedType}
+          promo={promo}
         />
       )}
     </section>

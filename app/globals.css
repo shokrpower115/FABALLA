@@ -30,6 +30,23 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Entrada suave con CSS: al terminar el elemento queda en su estilo normal (visible),
+   así nunca se queda oculto aunque se vuelva a pintar o JavaScript falle. */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+.aparecer {
+  animation: aparecer 0.6s ease-out;
+}
+
+.aparecer-tarde {
+  animation: aparecer 0.6s ease-out 0.2s backwards;
+}
+
 /* Deja espacio para la barra superior fija al saltar a una sección. */
 [id] {
   scroll-margin-top: 5rem;

@@ -7,6 +7,8 @@ export interface Momento {
   dia: number;
   // Minutos desde la medianoche
   minutos: number;
+  // Fecha del día en Culiacán, "AAAA-MM-DD" (sirve para comparar temporadas)
+  fecha: string;
 }
 
 const indiceDia: Record<string, number> = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
@@ -19,10 +21,22 @@ const formatoCuliacan = new Intl.DateTimeFormat("en-US", {
   hourCycle: "h23",
 });
 
+// en-CA formatea la fecha como AAAA-MM-DD.
+const formatoFechaCuliacan = new Intl.DateTimeFormat("en-CA", {
+  timeZone: negocio.zonaHoraria,
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+
 // Día y hora en Culiacán, sin importar la zona horaria del visitante.
 export function momentoEnCuliacan(fecha: Date): Momento {
   const partes = Object.fromEntries(formatoCuliacan.formatToParts(fecha).map((p) => [p.type, p.value]));
-  return { dia: indiceDia[partes.weekday], minutos: Number(partes.hour) * 60 + Number(partes.minute) };
+  return {
+    dia: indiceDia[partes.weekday],
+    minutos: Number(partes.hour) * 60 + Number(partes.minute),
+    fecha: formatoFechaCuliacan.format(fecha),
+  };
 }
 
 export type EstadoHoy = "abierto" | "masTarde" | "yaCerro" | "noHoy";

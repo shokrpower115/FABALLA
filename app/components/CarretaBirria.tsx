@@ -4,6 +4,7 @@ import { Check, Info } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { carretaBirria, paquetesBirria } from "../lib/eventos/birria";
 import { negocio, whatsappUrl } from "../lib/negocio";
+import { conPromo, textoPromo, type Promo } from "../lib/temporadas";
 import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
 
 const formatoPrecio = (precio: number) => `$${precio.toLocaleString("es-MX")}`;
@@ -11,9 +12,17 @@ const formatoPrecio = (precio: number) => `$${precio.toLocaleString("es-MX")}`;
 interface CarretaBirriaProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  // Promo de temporada activa: sube cada precio y agrega el regalo a "Incluye".
+  promo: Promo | null;
 }
 
-const CarretaBirria = ({ open, onOpenChange }: CarretaBirriaProps) => {
+const CarretaBirria = ({ open, onOpenChange, promo }: CarretaBirriaProps) => {
+  const incluye = conPromo(0, carretaBirria.incluye, promo).incluye;
+  const precio = (base: number) => conPromo(base, [], promo).precio;
+  const mensaje = promo
+    ? `${carretaBirria.mensajeWhatsApp} (precio de temporada con ${promo.regalo} de regalo)`
+    : carretaBirria.mensajeWhatsApp;
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent aria-describedby={undefined} className="max-h-[90vh] max-w-5xl overflow-hidden border-0 bg-tinta p-0 text-white sm:rounded-[32px]">
@@ -21,6 +30,11 @@ const CarretaBirria = ({ open, onOpenChange }: CarretaBirriaProps) => {
           <p className="text-sm font-semibold uppercase tracking-[0.35em] text-naranja">🍲 Birria para eventos</p>
           <DialogTitle className="mt-3 pr-8 text-3xl font-black sm:text-4xl">{carretaBirria.titulo}</DialogTitle>
           <p className="mt-2 text-lg text-white/70">{carretaBirria.subtitulo}</p>
+          {promo && (
+            <p className="mt-4 inline-block rounded-2xl bg-naranja px-4 py-2 text-sm font-bold text-tinta">
+              🎁 Precios de temporada. {textoPromo(promo)}
+            </p>
+          )}
 
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
             {paquetesBirria.map((paquete) => (
@@ -32,13 +46,13 @@ const CarretaBirria = ({ open, onOpenChange }: CarretaBirriaProps) => {
                   {paquete.opciones.map((opcion) => (
                     <li key={opcion.cantidad} className="flex items-center justify-between gap-4 border-b border-white/10 py-3 last:border-0">
                       <span className="text-sm text-white/80">{opcion.cantidad}</span>
-                      <span className="shrink-0 text-xl font-black text-naranja">{formatoPrecio(opcion.precio)}</span>
+                      <span className="shrink-0 text-xl font-black text-naranja">{formatoPrecio(precio(opcion.precio))}</span>
                     </li>
                   ))}
                 </ul>
 
                 <a
-                  href={whatsappUrl(`${carretaBirria.mensajeWhatsApp}: ${paquete.nombre}`)}
+                  href={whatsappUrl(`${mensaje}: ${paquete.nombre}`)}
                   target="_blank"
                   rel="noreferrer"
                   className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border border-whatsapp/50 px-4 py-2.5 text-sm font-semibold text-whatsapp transition hover:bg-whatsapp hover:text-white"
@@ -54,7 +68,7 @@ const CarretaBirria = ({ open, onOpenChange }: CarretaBirriaProps) => {
             <div className="rounded-[24px] border border-white/10 bg-white/5 p-6">
               <p className="text-sm font-semibold uppercase tracking-[0.25em] text-durazno">Todos los paquetes incluyen</p>
               <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                {carretaBirria.incluye.map((item) => (
+                {incluye.map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-white/85">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-naranja" />
                     {item}
@@ -75,7 +89,7 @@ const CarretaBirria = ({ open, onOpenChange }: CarretaBirriaProps) => {
           <div className="mt-10 flex flex-col items-center gap-5 text-center">
             <p className="text-2xl font-black sm:text-3xl">{carretaBirria.frase}</p>
             <a
-              href={whatsappUrl(carretaBirria.mensajeWhatsApp)}
+              href={whatsappUrl(mensaje)}
               target="_blank"
               rel="noreferrer"
               className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-whatsapp px-8 py-4 text-base font-bold text-white shadow-[0_15px_40px_rgba(37,211,102,0.3)] transition hover:-translate-y-0.5 sm:w-auto"

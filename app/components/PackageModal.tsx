@@ -9,12 +9,15 @@ import PackageList from "./PackageList";
 import PackageCard from "./PackageCard";
 import { paquetesAsada, paquetesPastor, paquetesMixtos, tiposTaquiza } from "../lib/eventos/taquiza";
 import { paquetesHotdogs, paquetesHotdogsSinPapas, tiposHotdog } from "../lib/eventos/hotdogs";
+import { conPromo, type Promo } from "../lib/temporadas";
 import { combosAsada, combosPastor, combosMixtos, tiposCombo } from "../lib/eventos/combos";
 
 interface PackageModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   type: "taquiza" | "hotdogs" | "combos";
+  // Promo de temporada activa: sube el precio y agrega el regalo a "Incluye".
+  promo: Promo | null;
 }
 
 const opcionesPorTipo = {
@@ -24,7 +27,7 @@ const opcionesPorTipo = {
 };
 
 // El componente se monta con key={type}, así la selección arranca en la primera opción de cada tipo.
-const PackageModal = ({ open, onOpenChange, type }: PackageModalProps) => {
+const PackageModal = ({ open, onOpenChange, type, promo }: PackageModalProps) => {
   const selectorOptions = opcionesPorTipo[type];
   const [selectedKind, setSelectedKind] = useState<string>(selectorOptions[0].id);
 
@@ -34,7 +37,7 @@ const PackageModal = ({ open, onOpenChange, type }: PackageModalProps) => {
     return "Combos";
   }, [type]);
 
-  const currentPackages = useMemo<
+  const basePackages = useMemo<
     Array<{ id: number; nombre: string; precio: number; incluye: string[]; tacos?: number; cantidad?: number; hotdogs?: number }>
   >(() => {
     if (type === "taquiza") {
@@ -52,6 +55,12 @@ const PackageModal = ({ open, onOpenChange, type }: PackageModalProps) => {
     if (selectedKind === "mixto") return combosMixtos;
     return combosAsada;
   }, [selectedKind, type]);
+
+  const currentPackages = useMemo(
+    () => basePackages.map((paquete) => ({ ...paquete, ...conPromo(paquete.precio, paquete.incluye, promo) })),
+    [basePackages, promo],
+  );
+  const notaPromo = promo ? `Precio de temporada con ${promo.regalo} de regalo` : undefined;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -95,6 +104,7 @@ const PackageModal = ({ open, onOpenChange, type }: PackageModalProps) => {
                         price={item.precio}
                         includes={item.incluye}
                         cta="Cotizar por WhatsApp"
+                        nota={notaPromo}
                       />
                     )}
                   />
@@ -110,6 +120,7 @@ const PackageModal = ({ open, onOpenChange, type }: PackageModalProps) => {
                         price={item.precio}
                         includes={item.incluye}
                         cta="Cotizar por WhatsApp"
+                        nota={notaPromo}
                       />
                     )}
                   />
@@ -125,6 +136,7 @@ const PackageModal = ({ open, onOpenChange, type }: PackageModalProps) => {
                         price={item.precio}
                         includes={item.incluye}
                         cta="Cotizar por WhatsApp"
+                        nota={notaPromo}
                       />
                     )}
                   />
