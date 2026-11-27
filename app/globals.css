@@ -30,6 +30,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Piezas que esperan su turno para aparecer al bajar (ver RevelarAlDesplazar.tsx).
+   Solo JavaScript pone este atributo, así que sin JavaScript todo se ve normal. */
+[data-revelar="oculto"] {
+  opacity: 0;
+}
+
 /* Entrada suave con CSS: al terminar el elemento queda en su estilo normal (visible),
    así nunca se queda oculto aunque se vuelva a pintar o JavaScript falle. */
 @keyframes aparecer {
