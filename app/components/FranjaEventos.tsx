@@ -19,7 +19,7 @@ const FranjaEventos = () => {
 
   return (
     <a
-      href="#eventos"
+      href={temporada ? `/${temporada.id}#eventos` : "#eventos"}
       className="group flex min-h-10 items-center justify-center gap-2 bg-vino px-4 py-2 text-center text-xs font-semibold text-white transition hover:bg-rojo sm:text-sm"
     >
       <span>{texto}</span>
