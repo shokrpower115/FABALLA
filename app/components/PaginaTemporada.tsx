@@ -23,6 +23,14 @@ const PaginaTemporada = ({ id }: { id: string }) => {
     if (estado && !vigente) router.replace("/#eventos");
   }, [estado, vigente, router]);
 
+  // Al llegar con #eventos (desde "Ver paquetes"), el recuadro de la promo aparece después
+  // de cargar y empuja los paquetes hacia abajo: volvemos a acomodar la vista en ellos.
+  useEffect(() => {
+    if (vigente && window.location.hash === "#eventos") {
+      document.getElementById("eventos")?.scrollIntoView();
+    }
+  }, [vigente]);
+
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-black/5 bg-crema/90 backdrop-blur-xl">

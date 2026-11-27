@@ -10,7 +10,7 @@ interface SeccionTemporadaProps {
   promo: Promo | null;
   diasParaApartar: number | null;
   // "inicio": bloque dentro de la página principal. "pagina": portada de faballa.com/<temporada>
-  // (ahí el título es el h1). En ambas, "Ver paquetes" baja a la sección de eventos.
+  // (ahí el título es el h1). "Ver paquetes" abre los paquetes de la página de la temporada.
   variante: "inicio" | "pagina";
 }
 
@@ -62,7 +62,7 @@ const SeccionTemporada = ({ temporada, promo, diasParaApartar, variante }: Secci
               <FaWhatsapp className="h-5 w-5" /> Apartar mi fecha
             </a>
             <a
-              href="#eventos"
+              href={variante === "pagina" ? "#eventos" : `/${temporada.id}#eventos`}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/10 px-7 py-3.5 font-semibold backdrop-blur transition hover:bg-white/20"
             >
               Ver paquetes de temporada <ArrowRight className="h-4 w-4" />
