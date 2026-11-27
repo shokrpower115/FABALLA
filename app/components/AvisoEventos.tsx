@@ -85,18 +85,13 @@ const AvisoEventos = () => {
 
   const contenido = temporada ?? eventosGeneral;
 
-  // "Ver paquetes" reemplaza el paso extra del historial, para que después "regresar"
-  // lleve directo a la página principal (sin tener que presionarlo dos veces).
+  // "Ver paquetes" baja a la sección de eventos de esta misma página (sin recargar),
+  // donde ya se ven los precios de temporada. Reemplaza el paso extra del historial
+  // para que después "regresar" no tenga que presionarse dos veces.
   const irAEventos = (evento: React.MouseEvent<HTMLAnchorElement>) => {
     evento.preventDefault();
     pasoEnHistorial.current = false;
-    if (temporada) {
-      // En temporada: a la página de la temporada (faballa.com/diciembre).
-      window.location.replace(`/${temporada.id}${window.location.search}`);
-      return;
-    }
-    // Fuera de temporada: baja a la sección de eventos de esta misma página.
-    window.history.replaceState(null, "", "#eventos");
+    window.history.replaceState(window.history.state, "", `${window.location.search}#eventos`);
     setAbierto(false);
     document.getElementById("eventos")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -133,7 +128,7 @@ const AvisoEventos = () => {
 
           <div className="mt-6 flex gap-3">
             <a
-              href={temporada ? `/${temporada.id}` : "#eventos"}
+              href="#eventos"
               onClick={irAEventos}
               className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-naranja px-6 py-3.5 font-bold text-tinta shadow-[0_12px_30px_rgba(247,127,0,0.35)] transition hover:-translate-y-0.5 hover:bg-naranja-claro"
             >
