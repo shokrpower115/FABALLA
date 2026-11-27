@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Gift } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowRight, Gift, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { eventosGeneral, textoPromo } from "../lib/temporadas";
 import { whatsappUrl } from "../lib/negocio";
 import { useTemporada } from "../lib/useTemporada";
-import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogTitle } from "./ui/dialog";
 
 const SEGUNDOS_PARA_MOSTRAR = 5;
 // Fuera de temporada, el aviso general vuelve a salir cada 14 días.
@@ -33,9 +33,14 @@ function marcarMostrado(clave: string) {
 
 // Ventana que aparece unos segundos después de entrar a la página principal.
 // En temporada sale una sola vez por persona; el resto del año, cada 14 días.
+//
+// Al abrirse agrega un paso al historial del navegador: así el botón "regresar"
+// del teléfono solo cierra la ventana en lugar de sacar a la persona del sitio.
 const AvisoEventos = () => {
   const estado = useTemporada();
   const [abierto, setAbierto] = useState(false);
+  // true mientras el paso extra del historial siga existiendo.
+  const pasoEnHistorial = useRef(false);
 
   const temporada = estado?.temporada ?? null;
   const promo = estado?.promo ?? null;
@@ -47,28 +52,76 @@ const AvisoEventos = () => {
     if (!pruebaForzada && yaSeMostro(clave, clave === "aviso-eventos" ? DIAS_ENTRE_AVISOS_GENERALES : null)) return;
 
     const id = setTimeout(() => {
+      window.history.pushState({ avisoEventos: true }, "");
+      pasoEnHistorial.current = true;
       setAbierto(true);
       marcarMostrado(clave);
     }, SEGUNDOS_PARA_MOSTRAR * 1000);
     return () => clearTimeout(id);
   }, [clave]);
 
+  // Botón "regresar" del teléfono o del navegador: el paso extra ya se consumió, solo cerramos.
+  useEffect(() => {
+    if (!abierto) return;
+    const alRegresar = () => {
+      pasoEnHistorial.current = false;
+      setAbierto(false);
+    };
+    window.addEventListener("popstate", alRegresar);
+    return () => window.removeEventListener("popstate", alRegresar);
+  }, [abierto]);
+
+  // Cerrar con la X, "Ahora no", tocando afuera o con Escape: quitamos el paso extra del historial.
+  const cambiarAbierto = useCallback((valor: boolean) => {
+    if (valor) return;
+    setAbierto(false);
+    if (pasoEnHistorial.current) {
+      pasoEnHistorial.current = false;
+      window.history.back();
+    }
+  }, []);
+
   if (!estado) return null;
 
   const contenido = temporada ?? eventosGeneral;
-  const verPaquetes = temporada ? `/${temporada.id}` : "#eventos";
+
+  // "Ver paquetes" reemplaza el paso extra del historial, para que después "regresar"
+  // lleve directo a la página principal (sin tener que presionarlo dos veces).
+  const irAEventos = (evento: React.MouseEvent<HTMLAnchorElement>) => {
+    evento.preventDefault();
+    pasoEnHistorial.current = false;
+    if (temporada) {
+      // En temporada: a la página de la temporada (faballa.com/diciembre).
+      window.location.replace(`/${temporada.id}${window.location.search}`);
+      return;
+    }
+    // Fuera de temporada: baja a la sección de eventos de esta misma página.
+    window.history.replaceState(null, "", "#eventos");
+    setAbierto(false);
+    document.getElementById("eventos")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <Dialog open={abierto} onOpenChange={setAbierto}>
-      <DialogContent aria-describedby={undefined} className="max-w-md overflow-hidden border-0 bg-tinta p-0 text-white sm:rounded-[28px]">
+    <Dialog open={abierto} onOpenChange={cambiarAbierto}>
+      <DialogContent
+        aria-describedby={undefined}
+        sinBotonCerrar
+        className="max-w-md overflow-hidden border-0 bg-tinta p-0 text-white sm:rounded-[28px]"
+      >
         <div className="relative h-40 bg-[url('/galeria/quesabirrias-orden.webp')] bg-cover bg-center">
           <div className="absolute inset-0 bg-gradient-to-t from-tinta via-tinta/40 to-transparent" />
           <span className="absolute bottom-3 left-6 text-5xl drop-shadow-lg">{contenido.emoji}</span>
+          <DialogClose
+            aria-label="Cerrar"
+            className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur transition hover:bg-black/80"
+          >
+            <X className="h-5 w-5" />
+          </DialogClose>
         </div>
 
-        <div className="px-6 pb-7 pt-2">
+        <div className="px-6 pb-6 pt-2">
           {temporada && <p className="text-xs font-semibold uppercase tracking-[0.3em] text-durazno">{temporada.nombre}</p>}
-          <DialogTitle className="mt-2 pr-6 text-2xl font-black leading-tight">{contenido.titulo}</DialogTitle>
+          <DialogTitle className="mt-2 text-2xl font-black leading-tight">{contenido.titulo}</DialogTitle>
           <p className="mt-3 text-sm leading-6 text-white/75">{contenido.mensaje}</p>
 
           {promo && (
@@ -78,23 +131,29 @@ const AvisoEventos = () => {
             </div>
           )}
 
-          <div className="mt-6 flex flex-col gap-3">
+          <div className="mt-6 flex gap-3">
+            <a
+              href={temporada ? `/${temporada.id}` : "#eventos"}
+              onClick={irAEventos}
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-naranja px-6 py-3.5 font-bold text-tinta shadow-[0_12px_30px_rgba(247,127,0,0.35)] transition hover:-translate-y-0.5 hover:bg-naranja-claro"
+            >
+              Ver paquetes <ArrowRight className="h-5 w-5" />
+            </a>
             <a
               href={whatsappUrl(contenido.mensajeWhatsApp)}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-3 font-bold text-white transition hover:-translate-y-0.5"
+              aria-label="Escribir por WhatsApp"
+              title="Escribir por WhatsApp"
+              className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-2xl bg-whatsapp text-white transition hover:-translate-y-0.5"
             >
-              <FaWhatsapp className="h-5 w-5" /> {temporada ? "Apartar mi fecha" : "Cotizar por WhatsApp"}
-            </a>
-            <a
-              href={verPaquetes}
-              onClick={() => setAbierto(false)}
-              className="rounded-full border border-white/20 px-6 py-3 text-center text-sm font-semibold text-white/90 transition hover:bg-white/10"
-            >
-              Ver paquetes
+              <FaWhatsapp className="h-6 w-6" />
             </a>
           </div>
+
+          <DialogClose className="mt-4 w-full py-2 text-center text-sm font-medium text-white/60 underline-offset-4 transition hover:text-white hover:underline">
+            Ahora no, seguir viendo
+          </DialogClose>
         </div>
       </DialogContent>
     </Dialog>
